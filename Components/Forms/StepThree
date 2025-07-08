@@ -1,0 +1,51 @@
+
+import React from 'react';
+import FormField from './FormField';
+import CheckboxGroup from './CheckboxGroup';
+
+const needsOptions = ['Fundraising', 'Legal', 'Accounting', 'CFO as service'];
+
+export default function StepThree({ formData, errors, onChange }) {
+  const handleNeedsChange = (need) => {
+    const currentNeeds = formData.needs || [];
+    const newNeeds = currentNeeds.includes(need)
+      ? currentNeeds.filter(n => n !== need)
+      : [...currentNeeds, need];
+    onChange('needs', newNeeds);
+  };
+
+  return (
+    <div className="space-y-6">
+      <FormField 
+        label="What are you looking for?" 
+        required 
+        error={errors.needs}
+        description="Select all that apply"
+      >
+        <CheckboxGroup
+          options={needsOptions}
+          selectedValues={formData.needs || []}
+          onChange={handleNeedsChange}
+          error={errors.needs}
+          columns={2}
+        />
+      </FormField>
+
+      <FormField 
+        label="Briefly describe your startup or current challenge" 
+        optional
+        error={errors.description}
+      >
+        <textarea
+          value={formData.description || ''}
+          onChange={(e) => onChange('description', e.target.value)}
+          rows={4}
+          className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm transition-all duration-200 
+            focus:ring-2 focus:ring-[#0DA6A6]/20 focus:border-[#0DA6A6] focus:outline-none
+            bg-white hover:border-gray-300 resize-none"
+          placeholder="Tell us about your startup, what you're building, or any specific challenges you're facing..."
+        />
+      </FormField>
+    </div>
+  );
+}

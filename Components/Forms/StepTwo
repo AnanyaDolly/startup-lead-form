@@ -1,0 +1,101 @@
+
+import React from 'react';
+import FormField from './FormField';
+import InputField from './InputField';
+import SelectField from './SelectField';
+
+const startupRevenues = ['Pre - Revenue', 'Below 1 Cr', '1-10 Cr', '10-50 Cr', '50 Cr +'];
+const industries = ['Fintech', 'Edtech', 'SaaS', 'AI', 'Healthtech', 'D2C', 'Other'];
+const teamSizes = ['1-5', '6-15', '16-50', '51+'];
+
+export default function StepTwo({ formData, errors, onChange }) {
+  return (
+    <div className="space-y-6">
+      <FormField 
+        label="Startup Name" 
+        required 
+        error={errors.startupName}
+      >
+        <InputField
+          value={formData.startupName}
+          onChange={(e) => onChange('startupName', e.target.value)}
+          placeholder="Enter your startup name"
+          error={errors.startupName}
+        />
+      </FormField>
+
+      <FormField 
+        label="Website URL" 
+        optional
+        description="Preferred but not required"
+        error={errors.websiteUrl}
+      >
+        <InputField
+          type="url"
+          value={formData.websiteUrl}
+          onChange={(e) => onChange('websiteUrl', e.target.value)}
+          placeholder="https://yourstartup.com"
+          error={errors.websiteUrl}
+        />
+      </FormField>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <FormField 
+          label="Startup Revenue" 
+          required 
+          error={errors.startupRevenue}
+        >
+          <SelectField
+            value={formData.startupRevenue}
+            onChange={(e) => onChange('startupRevenue', e.target.value)}
+            options={startupRevenues}
+            placeholder="Select your current revenue"
+            error={errors.startupRevenue}
+          />
+        </FormField>
+
+        <FormField 
+          label="Industry" 
+          required 
+          error={errors.industry}
+        >
+          <SelectField
+            value={formData.industry}
+            onChange={(e) => onChange('industry', e.target.value)}
+            options={industries}
+            placeholder="Select your industry"
+            error={errors.industry}
+          />
+        </FormField>
+      </div>
+
+      <FormField 
+        label="Location" 
+        required 
+        error={errors.location}
+        description="City, Country format"
+      >
+        <InputField
+          value={formData.location}
+          onChange={(e) => onChange('location', e.target.value)}
+          placeholder="San Francisco, USA"
+          error={errors.location}
+        />
+      </FormField>
+
+      <FormField 
+        label="Team Size" 
+        optional
+        error={errors.teamSize}
+      >
+        <SelectField
+          value={formData.teamSize}
+          onChange={(e) => onChange('teamSize', e.target.value)}
+          options={teamSizes}
+          placeholder="Select team size"
+          error={errors.teamSize}
+        />
+      </FormField>
+    </div>
+  );
+}

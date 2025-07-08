@@ -1,0 +1,27 @@
+import React from 'react';
+
+export default function FormField({ 
+  label, 
+  required = false, 
+  optional = false, 
+  error, 
+  children,
+  description 
+}) {
+  return (
+    <div className="space-y-2">
+      <label className="block text-sm font-semibold text-gray-700">
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+        {optional && <span className="text-gray-400 ml-1 font-normal">(Optional)</span>}
+      </label>
+      {description && (
+        <p className="text-xs text-gray-500 -mt-1">{description}</p>
+      )}
+      {children}
+      {error && (
+        <p className="text-red-500 text-sm font-medium animate-pulse">{error}</p>
+      )}
+    </div>
+  );
+}

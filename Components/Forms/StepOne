@@ -1,0 +1,66 @@
+
+import React from 'react';
+import FormField from './FormField';
+import InputField from './InputField';
+
+export default function StepOne({ formData, errors, onChange }) {
+  return (
+    <div className="space-y-6">
+      <FormField 
+        label="Full Name" 
+        required 
+        error={errors.fullName}
+      >
+        <InputField
+          value={formData.fullName}
+          onChange={(e) => onChange('fullName', e.target.value)}
+          placeholder="Enter your full name"
+          error={errors.fullName}
+        />
+      </FormField>
+
+      <FormField 
+        label="Work Email" 
+        required 
+        error={errors.workEmail}
+        description="Please use your business email address"
+      >
+        <InputField
+          type="email"
+          value={formData.workEmail}
+          onChange={(e) => onChange('workEmail', e.target.value)}
+          placeholder="founder@startup.com"
+          error={errors.workEmail}
+        />
+      </FormField>
+
+      <FormField 
+        label="Phone Number" 
+        optional
+        error={errors.phoneNumber}
+      >
+        <InputField
+          type="tel"
+          value={formData.phoneNumber}
+          onChange={(e) => onChange('phoneNumber', e.target.value)}
+          placeholder="+1 (555) 123-4567"
+          error={errors.phoneNumber}
+        />
+      </FormField>
+
+      <FormField
+        label="LinkedIn URL"
+        required
+        error={errors.linkedinUrl}
+      >
+        <InputField
+          type="url"
+          value={formData.linkedinUrl}
+          onChange={(e) => onChange('linkedinUrl', e.target.value)}
+          placeholder="https://linkedin.com/in/yourprofile"
+          error={errors.linkedinUrl}
+        />
+      </FormField>
+    </div>
+  );
+}

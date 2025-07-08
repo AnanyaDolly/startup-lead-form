@@ -1,0 +1,166 @@
+
+import React from 'react';
+import FormField from './FormField';
+import InputField from './InputField';
+import SelectField from './SelectField';
+
+const hearAboutUsOptions = ['LinkedIn', 'Google', 'Referral', 'Newsletter', 'Instagram', 'Other'];
+const fundingAmountOptions = ['Below $100K', '$100K - $500K', '$500K - $2M', '$2M - $10M', '$10M+'];
+
+export default function StepFour({ formData, errors, onChange }) {
+  return (
+    <div className="space-y-6">
+      <FormField 
+        label="Have you raised any funding?" 
+        required 
+        error={errors.hasRaisedFunding}
+      >
+        <div className="space-y-3">
+          <label className="flex items-center space-x-3 cursor-pointer group">
+            <input
+              type="radio"
+              name="hasRaisedFunding"
+              value="yes"
+              checked={formData.hasRaisedFunding === 'yes'}
+              onChange={(e) => onChange('hasRaisedFunding', e.target.value)}
+              className="w-4 h-4 text-[#0DA6A6] border-gray-300 focus:ring-[#0DA6A6] focus:ring-2"
+            />
+            <span className="text-sm text-gray-700 group-hover:text-[#0DA6A6] transition-colors">Yes</span>
+          </label>
+          <label className="flex items-center space-x-3 cursor-pointer group">
+            <input
+              type="radio"
+              name="hasRaisedFunding"
+              value="no"
+              checked={formData.hasRaisedFunding === 'no'}
+              onChange={(e) => onChange('hasRaisedFunding', e.target.value)}
+              className="w-4 h-4 text-[#0DA6A6] border-gray-300 focus:ring-[#0DA6A6] focus:ring-2"
+            />
+            <span className="text-sm text-gray-700 group-hover:text-[#0DA6A6] transition-colors">No</span>
+          </label>
+        </div>
+      </FormField>
+
+      {formData.hasRaisedFunding === 'yes' && (
+        <FormField 
+          label="How much?" 
+          optional
+          error={errors.previousFundingAmount}
+        >
+          <SelectField
+            value={formData.previousFundingAmount || ''}
+            onChange={(e) => onChange('previousFundingAmount', e.target.value)}
+            options={fundingAmountOptions}
+            placeholder="Select amount raised"
+            error={errors.previousFundingAmount}
+          />
+        </FormField>
+      )}
+
+      <FormField 
+        label="Are you currently raising funds?" 
+        required 
+        error={errors.currentlyRaising}
+      >
+        <div className="space-y-3">
+          <label className="flex items-center space-x-3 cursor-pointer group">
+            <input
+              type="radio"
+              name="currentlyRaising"
+              value="yes"
+              checked={formData.currentlyRaising === 'yes'}
+              onChange={(e) => onChange('currentlyRaising', e.target.value)}
+              className="w-4 h-4 text-[#0DA6A6] border-gray-300 focus:ring-[#0DA6A6] focus:ring-2"
+            />
+            <span className="text-sm text-gray-700 group-hover:text-[#0DA6A6] transition-colors">Yes</span>
+          </label>
+          <label className="flex items-center space-x-3 cursor-pointer group">
+            <input
+              type="radio"
+              name="currentlyRaising"
+              value="no"
+              checked={formData.currentlyRaising === 'no'}
+              onChange={(e) => onChange('currentlyRaising', e.target.value)}
+              className="w-4 h-4 text-[#0DA6A6] border-gray-300 focus:ring-[#0DA6A6] focus:ring-2"
+            />
+            <span className="text-sm text-gray-700 group-hover:text-[#0DA6A6] transition-colors">No</span>
+          </label>
+        </div>
+      </FormField>
+
+      {formData.currentlyRaising === 'yes' && (
+        <FormField 
+          label="How much are you looking to raise?" 
+          optional
+          error={errors.raisingAmount}
+        >
+          <InputField
+            value={formData.raisingAmount || ''}
+            onChange={(e) => onChange('raisingAmount', e.target.value)}
+            placeholder="e.g., $1M, $5M Series A"
+            error={errors.raisingAmount}
+          />
+        </FormField>
+      )}
+
+      <FormField 
+        label="How did you hear about us?" 
+        optional
+        error={errors.hearAboutUs}
+      >
+        <SelectField
+          value={formData.hearAboutUs || ''}
+          onChange={(e) => onChange('hearAboutUs', e.target.value)}
+          options={hearAboutUsOptions}
+          placeholder="Select source"
+          error={errors.hearAboutUs}
+        />
+      </FormField>
+
+      <div className="border-t border-gray-100 pt-6">
+        <div className="space-y-4">
+          <label className="flex items-start space-x-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={formData.privacyConsent || false}
+              onChange={(e) => onChange('privacyConsent', e.target.checked)}
+              className="w-4 h-4 text-[#0DA6A6] border-gray-300 rounded focus:ring-[#0DA6A6] focus:ring-2 mt-1"
+            />
+            <div>
+              <span className="text-sm text-gray-700 group-hover:text-[#0DA6A6] transition-colors">
+                I agree to the{' '}
+                <a 
+                  href="https://chopfinance.ai/privacy" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[#0DA6A6] hover:underline font-medium"
+                >
+                  privacy policy
+                </a>
+                {' '}<span className="text-red-500">*</span>
+              </span>
+            </div>
+          </label>
+          {errors.privacyConsent && (
+            <p className="text-red-500 text-sm font-medium animate-pulse ml-7">
+              {errors.privacyConsent}
+            </p>
+          )}
+
+          <label className="flex items-start space-x-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={formData.updatesConsent || false}
+              onChange={(e) => onChange('updatesConsent', e.target.checked)}
+              className="w-4 h-4 text-[#0DA6A6] border-gray-300 rounded focus:ring-[#0DA6A6] focus:ring-2 mt-1"
+            />
+            <span className="text-sm text-gray-700 group-hover:text-[#0DA6A6] transition-colors">
+              Send me updates, resources, and event invites{' '}
+              <span className="text-gray-400 font-normal">(Optional)</span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+}

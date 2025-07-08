@@ -1,0 +1,152 @@
+{
+  "name": "StartupLead",
+  "type": "object",
+  "properties": {
+    "fullName": {
+      "type": "string",
+      "description": "Founder's full name"
+    },
+    "workEmail": {
+      "type": "string",
+      "format": "email",
+      "description": "Business email address"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "description": "Phone number (optional)"
+    },
+    "linkedinUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Founder's LinkedIn profile URL"
+    },
+    "startupName": {
+      "type": "string",
+      "description": "Name of the startup"
+    },
+    "websiteUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Startup website URL"
+    },
+    "startupRevenue": {
+      "type": "string",
+      "enum": [
+        "Pre - Revenue",
+        "Below 1 Cr",
+        "1-10 Cr",
+        "10-50 Cr",
+        "50 Cr +"
+      ],
+      "description": "Current revenue of the startup"
+    },
+    "industry": {
+      "type": "string",
+      "enum": [
+        "Fintech",
+        "Edtech",
+        "SaaS",
+        "AI",
+        "Healthtech",
+        "D2C",
+        "Other"
+      ],
+      "description": "Industry category"
+    },
+    "location": {
+      "type": "string",
+      "description": "City, Country location"
+    },
+    "teamSize": {
+      "type": "string",
+      "enum": [
+        "1-5",
+        "6-15",
+        "16-50",
+        "51+"
+      ],
+      "description": "Current team size"
+    },
+    "needs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Fundraising",
+          "Legal",
+          "Accounting",
+          "CFO as service"
+        ]
+      },
+      "description": "What the founder is looking for"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of startup or challenge"
+    },
+    "hasRaisedFunding": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "description": "Whether they have raised funding"
+    },
+    "previousFundingAmount": {
+      "type": "string",
+      "enum": [
+        "Below $100K",
+        "$100K - $500K",
+        "$500K - $2M",
+        "$2M - $10M",
+        "$10M+"
+      ],
+      "description": "Amount of previous funding raised"
+    },
+    "currentlyRaising": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "description": "Currently raising funds"
+    },
+    "raisingAmount": {
+      "type": "string",
+      "description": "Amount looking to raise"
+    },
+    "hearAboutUs": {
+      "type": "string",
+      "enum": [
+        "LinkedIn",
+        "Google",
+        "Referral",
+        "Newsletter",
+        "Instagram",
+        "Other"
+      ],
+      "description": "How they heard about us"
+    },
+    "privacyConsent": {
+      "type": "boolean",
+      "description": "Privacy policy consent"
+    },
+    "updatesConsent": {
+      "type": "boolean",
+      "description": "Updates consent"
+    }
+  },
+  "required": [
+    "fullName",
+    "workEmail",
+    "linkedinUrl",
+    "startupName",
+    "startupRevenue",
+    "industry",
+    "location",
+    "needs",
+    "hasRaisedFunding",
+    "currentlyRaising",
+    "privacyConsent"
+  ]
+}
